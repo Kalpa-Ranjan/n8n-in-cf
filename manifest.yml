@@ -1,0 +1,25 @@
+applications:
+  - name: my-n8n-platform
+    memory: 2G
+    disk_quota: 4G
+    random-route: true
+    docker:
+      image: n8nio/n8n:latest
+    services:
+      - dbtest
+    env:
+      N8N_PORT: 5678                 # 🔥 RESTORE default port to align with BTP's health check router
+      N8N_LISTEN_ADDRESS: "0.0.0.0"
+      GENERIC_TIMEZONE: "Asia/Kolkata"
+      N8N_ENCRYPTION_KEY: "UseAUniqueRandom32CharacterStringHere"
+      N8N_ENDPOINT_HEALTH: "health"
+      DB_TYPE: postgresdb
+      DB_POSTGRESDB_SSL_ENABLED: "true"
+      DB_POSTGRESDB_SSL_REJECT_UNAUTHORIZED: "false"
+    command: |
+      export DB_POSTGRESDB_HOST=$(node -e "console.log(JSON.parse(process.env.VCAP_SERVICES)['postgresql-db'][0].credentials.hostname)")
+      export DB_POSTGRESDB_PORT=$(node -e "console.log(JSON.parse(process.env.VCAP_SERVICES)['postgresql-db'][0].credentials.port)")
+      export DB_POSTGRESDB_DATABASE=$(node -e "console.log(JSON.parse(process.env.VCAP_SERVICES)['postgresql-db'][0].credentials.dbname)")
+      export DB_POSTGRESDB_USER=$(node -e "console.log(JSON.parse(process.env.VCAP_SERVICES)['postgresql-db'][0].credentials.username)")
+      export DB_POSTGRESDB_PASSWORD=$(node -e "console.log(JSON.parse(process.env.VCAP_SERVICES)['postgresql-db'][0].credentials.password)")
+      tini -- /docker-entrypoint.sh

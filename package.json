@@ -1,0 +1,12 @@
+{
+  "name": "n8n-btp-cf",
+  "version": "1.0.0",
+  "description": "n8n runner on SAP BTP Cloud Foundry with PostgreSQL",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "n8n": "^1.0.0"
+  }
+}
