@@ -2,11 +2,11 @@ applications:
   - name: my-n8n-platform
     memory: 2G
     disk_quota: 4G
-    random-route: true
+    random-route: false
     docker:
       image: n8nio/n8n:latest
     services:
-      - dbtest
+      - n8n-postgres-db
     env:
       N8N_PORT: 5678                 # 🔥 RESTORE default port to align with BTP's health check router
       N8N_LISTEN_ADDRESS: "0.0.0.0"
