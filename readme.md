@@ -34,6 +34,7 @@ flowchart LR
   <a href="#your-link"><img src="https://img.shields.io/badge/Your_link-EF6C00?style=flat-square" alt="Your link"></a>
   <a href="#first-visit"><img src="https://img.shields.io/badge/First_visit-2E7D32?style=flat-square" alt="First visit"></a>
   <a href="#keep-in-mind"><img src="https://img.shields.io/badge/Keep_in_mind-C62828?style=flat-square" alt="Keep in mind"></a>
+  <a href="#what-the-code-does"><img src="https://img.shields.io/badge/What_the_code_does-00838F?style=flat-square" alt="What the code does"></a>
 </p>
 
 ---
@@ -138,3 +139,32 @@ Use your email and a password you will remember. The next visit is the same link
 
 > [!WARNING]
 > A new setup, or a restart, clears your workflows and saved passwords.
+
+## What the code does
+
+After the project reaches Cloud Foundry, the work starts with one download: n8n and the Node modules it needs.
+
+```mermaid
+%%{init: {'theme': 'base', 'themeVariables': {'primaryColor':'#E0F7FA','primaryTextColor':'#006064','primaryBorderColor':'#00838F','lineColor':'#EF6C00','secondaryColor':'#FFF3E0','tertiaryColor':'#E8F5E9','fontFamily':'trebuchet ms'}}}%%
+flowchart LR
+    A[Download n8n] --> B[Pack the app]
+    B --> C[index.js starts]
+    C --> D[n8n opens your link]
+```
+
+<p align="center">
+  <img src="https://img.shields.io/badge/1-Download_modules-00838F?style=for-the-badge" alt="1 Download modules">
+  <img src="https://img.shields.io/badge/2-Pack_the_app-1565C0?style=for-the-badge" alt="2 Pack the app">
+  <img src="https://img.shields.io/badge/3-Start_index.js-6A1B9A?style=for-the-badge" alt="3 Start index.js">
+  <img src="https://img.shields.io/badge/4-Open_n8n-2E7D32?style=for-the-badge" alt="4 Open n8n">
+</p>
+
+| Step | Where | What happens |
+| --- | --- | --- |
+| <img src="https://img.shields.io/badge/1-00838F?style=flat-square" alt="1"> | `package.json` | Cloud Foundry reads the n8n dependency and downloads the Node modules. This is the long "Installing node modules" step. |
+| <img src="https://img.shields.io/badge/2-1565C0?style=flat-square" alt="2"> | `manifest.yml` | Those files are packed into the app. The app is given 1 GB of memory, 2 GB of disk, and a new link. |
+| <img src="https://img.shields.io/badge/3-6A1B9A?style=flat-square" alt="3"> | `index.js` | The app starts. This file tells n8n to use SQLite, listen on the Cloud Foundry port, and use the new link for the editor and webhooks. |
+| <img src="https://img.shields.io/badge/4-2E7D32?style=flat-square" alt="4"> | n8n | `index.js` starts n8n. The first launch creates the database. Then the editor page is ready. |
+
+> [!NOTE]
+> The module download happens on Cloud Foundry, not on your computer. Each new setup downloads n8n again, then `index.js` starts it.
