@@ -1,7 +1,7 @@
 applications:
   - name: my-n8n-platform
-    memory: 4G
-    disk_quota: 4G
+    memory: 1G
+    disk_quota: 2G
     stack: cflinuxfs4
     routes:
       - route: ((app-host)).((app-domain))
@@ -18,3 +18,5 @@ applications:
       N8N_PROTOCOL: https
       N8N_PROXY_HOPS: "1"
       N8N_SECURE_COOKIE: "true"
+      OPTIMIZE_MEMORY: true
+      NODE_MODULES_CACHE: false
