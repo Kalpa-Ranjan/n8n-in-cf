@@ -162,7 +162,7 @@ flowchart LR
 | Step | Where | What happens |
 | --- | --- | --- |
 | <img src="https://img.shields.io/badge/1-00838F?style=flat-square" alt="1"> | `package.json` | Cloud Foundry reads the n8n dependency and downloads the Node modules. This is the long "Installing node modules" step. |
-| <img src="https://img.shields.io/badge/2-1565C0?style=flat-square" alt="2"> | `manifest.yml` | Those files are packed into the app. The app is given 1 GB of memory, 2 GB of disk, and a new link. |
+| <img src="https://img.shields.io/badge/2-1565C0?style=flat-square" alt="2"> | `manifest.yml` | Those files are packed into the app. The app is given 1 GB of memory, 2.5 GB of disk, and a new link. |
 | <img src="https://img.shields.io/badge/3-6A1B9A?style=flat-square" alt="3"> | `index.js` | The app starts. This file tells n8n to use SQLite, listen on the Cloud Foundry port, and use the new link for the editor and webhooks. |
 | <img src="https://img.shields.io/badge/4-2E7D32?style=flat-square" alt="4"> | n8n | `index.js` starts n8n. The first launch creates the database. Then the editor page is ready. |
 

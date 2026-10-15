@@ -1,7 +1,7 @@
 applications:
   - name: my-n8n-platform
     memory: 1G
-    disk_quota: 2G
+    disk_quota: 2560M
     stack: cflinuxfs4
     routes:
       - route: ((app-host)).((app-domain))
